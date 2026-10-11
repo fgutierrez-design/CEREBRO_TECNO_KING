@@ -5,16 +5,12 @@
 #  Ollama corre aparte (ver docker-compose.yml).
 # ============================================================
 FROM python:3.11-slim
-
 WORKDIR /app
-
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
-
+COPY requirements.txt requisitos.txt ./
+RUN pip install --no-cache-dir -r requirements.txt || pip install --no-cache-dir -r requisitos.txt
 COPY . .
-
-ENV JARVIS_MOTOR_PUERTO=11435
-ENV OLLAMA_URL=http://ollama:11434
-EXPOSE 11435
-
+ENV JARVIS_MOTOR_PUERTO=10000
+ENV PORT=10000
+ENV OLLAMA_URL=https://api.groq.com/openai/v1
+EXPOSE 10000
 CMD ["python", "servidor_motor.py"]
