@@ -9,8 +9,7 @@ WORKDIR /app
 COPY requirements.txt requisitos.txt ./
 RUN pip install --no-cache-dir -r requirements.txt || pip install --no-cache-dir -r requisitos.txt
 COPY . .
-ENV JARVIS_MOTOR_PUERTO=10000
 ENV PORT=10000
-ENV OLLAMA_URL=https://api.groq.com/openai/v1
+ENV JARVIS_MOTOR_PUERTO=10000
 EXPOSE 10000
 CMD ["python", "servidor_motor.py"]
