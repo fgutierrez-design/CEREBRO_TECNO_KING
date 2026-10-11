@@ -1,0 +1,78 @@
+============================================================
+   MOTOR DE IA JARVIS - TECNO G
+   Tu propio motor de inteligencia artificial en la nube
+============================================================
+
+QUE ES ESTO
+-----------
+Es TU motor de IA completo: piensa, conversa, programa, busca en
+internet, escribe archivos y recuerda cosas. Vive en TU nube con
+GPU y es 100% tuyo (no le pagas API a nadie).
+
+LA VERDAD (leer una vez)
+------------------------
+No se puede "clonar" un motor como el de las grandes empresas
+(eso necesita miles de GPU y millones de dolares). Pero SI se
+puede tener un motor propio, profesional y potente, usando un
+modelo abierto (Qwen de Alibaba, gratis y libre) al que le pones
+TU personalidad. Eso es lo que hace este paquete. Es real y funciona.
+
+QUE HACE EL MOTOR
+-----------------
+  - Conversa en espanol argentino (personalidad JARVIS FER).
+  - Piensa paso a paso (bucle pensar -> actuar -> observar).
+  - USA HERRAMIENTAS solo, cuando le hacen falta:
+      * buscar_web       -> busca en internet
+      * leer_url         -> lee una pagina web
+      * leer_archivo     -> lee un archivo
+      * escribir_archivo -> crea/guarda un archivo
+      * listar_archivos  -> lista archivos
+      * ejecutar_python  -> corre codigo Python
+      * calcular         -> hace cuentas
+      * recordar / recuperar -> memoria permanente
+      * hora_actual      -> fecha y hora
+  - Se conecta con tu JARVIS del disco externo.
+
+COMO SE USA (resumen)
+---------------------
+1) SUBIR el codigo a la nube:
+     Windows:  doble clic en SUBIR_A_LA_NUBE.bat
+     Linux:    bash subir_a_la_nube.sh usuario@IP_DE_TU_NUBE
+
+2) INSTALAR en la nube (por SSH):
+     ssh usuario@IP_DE_TU_NUBE
+     cd MOTOR_COMPLETO
+     bash instalar_motor.sh
+
+3) PROBAR:
+     python3 cliente_prueba.py http://127.0.0.1:11435
+
+4) CONECTAR tu JARVIS (disco externo):
+     Editar config_nube.json y poner la IP de tu nube.
+
+Para el paso a paso detallado, abri:  GUIA_COMPLETA.md
+
+ARCHIVOS IMPORTANTES
+--------------------
+  servidor_motor.py        El servidor que expone tu motor (API).
+  motor_core.py            El cerebro (bucle agente).
+  herramientas.py          Las herramientas del motor.
+  Modelfile                La personalidad de tu motor.
+  config_motor.json        Configuracion (modelo, temperatura, etc).
+  instalar_motor.sh        Instalador todo-en-uno para la nube.
+  subir_a_la_nube.sh       Sube el codigo (Linux/Mac).
+  SUBIR_A_LA_NUBE.bat      Sube el codigo (Windows).
+  servidor_conocimiento.py Servidor de la memoria/conocimiento.
+  cliente_prueba.py        Prueba que el motor anda.
+
+SEGURIDAD (IMPORTANTE)
+----------------------
+Un motor abierto a internet lo puede usar cualquiera. Hace UNA de estas:
+  A) Clave:  export JARVIS_MOTOR_CLAVE=tu_clave  (y reiniciar el servicio)
+  B) Tunel SSH (lo mas seguro): desde tu PC:
+       ssh -L 11435:localhost:11435 -L 8770:localhost:8770 usuario@IP_DE_TU_NUBE
+  C) Firewall: abri los puertos SOLO a la IP de tu casa.
+
+============================================================
+  TECNO G - La Punta, San Luis, Argentina
+============================================================

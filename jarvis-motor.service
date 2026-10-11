@@ -1,0 +1,26 @@
+# ============================================================
+#  jarvis-motor.service  -  Servicio del sistema (systemd)
+#
+#  Copia este archivo a:  /etc/systemd/system/jarvis-motor.service
+#  (El instalador instalar_motor.sh ya lo hace solo.)
+#
+#  IMPORTANTE: cambia las rutas y el usuario por los tuyos.
+# ============================================================
+[Unit]
+Description=Motor de IA JARVIS (API) - TECNO G
+After=network.target ollama.service
+Wants=ollama.service
+
+[Service]
+Type=simple
+User=TU_USUARIO
+WorkingDirectory=/home/TU_USUARIO/MOTOR_COMPLETO
+Environment="JARVIS_MOTOR_PUERTO=11435"
+# Descomenta para exigir clave en la API:
+# Environment="JARVIS_MOTOR_CLAVE=tu_clave_secreta"
+ExecStart=/home/TU_USUARIO/MOTOR_COMPLETO/.venv/bin/python /home/TU_USUARIO/MOTOR_COMPLETO/servidor_motor.py
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

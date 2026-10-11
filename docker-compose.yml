@@ -1,0 +1,51 @@
+# ============================================================
+#  docker-compose.yml  -  Motor JARVIS + Ollama en Docker
+#
+#  USO (en tu nube con GPU):
+#     docker compose up -d
+#
+#  Luego baja el modelo y crea tu motor:
+#     docker compose exec ollama ollama pull qwen2.5:7b
+#     docker compose cp Modelfile ollama:/tmp/Modelfile
+#     docker compose exec ollama ollama create jarvis-fer -f /tmp/Modelfile
+#
+#  NOTA: para usar la GPU necesitas el NVIDIA Container Toolkit.
+# ============================================================
+version: "3.9"
+
+services:
+  ollama:
+    image: ollama/ollama:latest
+    container_name: jarvis-ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_datos:/root/.ollama
+    environment:
+      - OLLAMA_HOST=0.0.0.0:11434
+      - OLLAMA_KEEP_ALIVE=30m
+    restart: unless-stopped
+    # Descomenta para GPU NVIDIA:
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - driver: nvidia
+    #           count: all
+    #           capabilities: [gpu]
+
+  motor:
+    build: .
+    container_name: jarvis-motor
+    ports:
+      - "11435:11435"
+    environment:
+      - JARVIS_MOTOR_PUERTO=11435
+      - OLLAMA_URL=http://ollama:11434
+      # - JARVIS_MOTOR_CLAVE=tu_clave_secreta
+    depends_on:
+      - ollama
+    restart: unless-stopped
+
+volumes:
+  ollama_datos:
